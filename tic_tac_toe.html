@@ -1,431 +1,266 @@
+<!-- Complete HTML, CSS, and JS code for Tic Tac Toe Game with error fixed -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe Game</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <style>
-      body {
-     font-family: 'Anton SC', sans-serif;
-    margin: 0;
-    background: linear-gradient(to right, #83a4d4, #b6fbff);
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    /* background-color: #f0f2f5; Fallback color */
-    /* background-image: url(""); */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-blend-mode: overlay;
-    color: #333;
-    flex-direction: column;
-}
-        
-        .game-container {
-            background-color: rgba(255, 255, 255, 0.9);
-        
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 350px;
-            max-width: 90%;
-            text-align: center;
-            margin-bottom: 20px;
-            backdrop-filter: blur(5px);
-        }
-        
-        .game-header {
-            margin-bottom: 20px;
-            font-size: 20px;
-            font-weight: bold;  
-                                 
-           
-        }
-        .game-header h1{
-
-            color: #5e60ce;
-    font-size: 2.0rem;               /* Sets a large font size */
-   /* Purple-blue color */
-    margin-bottom: 20px;  
-    letter-spacing: 1px; 
-    
-    font-weight: 900;           /* Space below the title */
-    /* font-family: 'Anton SC', sans-serif;  Uses the Anton SC font */
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    text-transform: uppercase;       /* Forces all letters to uppercase */
-              /* Makes the text bold */
-}
-        
-        .game-info {
-            margin: 10px 0;
-            font-size: 16px;
-        }
-        
-        .board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 10px;
-            margin: 20px auto;
-        }
-        
-        .cell {
-            width: 80px;
-            height: 80px;
-            background-color: #fff;
-            border: 2px solid grey;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 36px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .cell:hover {
-            background-color: #f8f9fa;
-        }
-        
-        .cell.x {
-            color: #e74c3c;
-        }
-        
-        .cell.o {
-            color: #3498db;
-        }
-        
-        .status {
-            margin: 15px 0;
-            font-size: 18px;
-            font-weight: 500;
-            min-height: 24px;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: center;
-            color: #5e60ce;
-    font-size: 2.0rem;             
-   /* Purple-blue color */
-    margin-bottom: 20px;  
-    letter-spacing: 1px; 
-    
-    font-weight: 900;           /* Space below the title */
-    /* font-family: 'Bebas Neue', sans-serif;
-     */font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-letter-spacing: -0.5px; /* Uses the Anton SC font */
-    text-transform: uppercase;
-        }
-        
-        .back-btn, .reset-btn {
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 18px;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            /* font-family: 'Bebas Neue', sans-serif; */
-/* letter-spacing: -0.5px; */
-            cursor: pointer;
-            /* font-weight: 900; */
-            transition: background-color 0.2s;
-        }
-        
-        .back-btn {
-            background-color: #3498db;
-        }
-        
-        .back-btn:hover {
-            background-color: #e74c3c;
-        }
-        
-        .reset-btn {
-            background-color: #f39c12;
-        }
-        
-        .reset-btn:hover {
-            background-color: #e67e22;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Anton SC', sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-blend-mode: overlay;
+      color: #333;
+      flex-direction: column;
+    }
+    .game-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 350px;
+      max-width: 90%;
+      text-align: center;
+      margin-bottom: 20px;
+      backdrop-filter: blur(5px);
+    }
+    .game-header h1 {
+      color: #5e60ce;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      font-weight: 900;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      text-transform: uppercase;
+    }
+    .game-info {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+      margin: 20px auto;
+    }
+    .cell {
+      width: 80px;
+      height: 80px;
+      background-color: #fff;
+      border: 2px solid grey;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cell:hover { background-color: #f8f9fa; }
+    .cell.x { color: #e74c3c; }
+    .cell.o { color: #3498db; }
+    .status {
+      margin: 15px 0;
+      font-size: 18px;
+      font-weight: 500;
+      min-height: 24px;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    .back-btn, .reset-btn {
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 18px;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .back-btn { background-color: #3498db; }
+    .back-btn:hover { background-color: #e74c3c; }
+    .reset-btn { background-color: #f39c12; }
+    .reset-btn:hover { background-color: #e67e22; }
+  </style>
 </head>
 <body>
-    <div class="game-container">
-        <div class="game-header">
-            <h1>TIC TAC TOE</h1>
-            <div class="game-info" id="difficulty-info"></div>
-            <div class="game-info">
-                You: <span id="player-symbol" class="x">X</span> | 
-                Computer: <span id="computer-symbol" class="o">O</span>
-            </div>
-        </div>
-        
-        <div class="status" id="status">Your turn!</div>
-        
-        <div class="board" id="board">
-            <div class="cell" data-index="0"></div>
-            <div class="cell" data-index="1"></div>
-            <div class="cell" data-index="2"></div>
-            <div class="cell" data-index="3"></div>
-            <div class="cell" data-index="4"></div>
-            <div class="cell" data-index="5"></div>
-            <div class="cell" data-index="6"></div>
-            <div class="cell" data-index="7"></div>
-            <div class="cell" data-index="8"></div>
-        </div>
+  <div class="game-container">
+    <div class="game-header">
+      <h1>TIC TAC TOE</h1>
+      <div class="game-info" id="difficulty-info"></div>
+      <div class="game-info">
+        You: <span id="player-symbol" class="x">X</span> |
+        Computer: <span id="computer-symbol" class="o">O</span>
+      </div>
     </div>
-    
-    <div class="action-buttons">
-        <button class="reset-btn" id="reset-btn">RESET GAME</button>
-        <button class="back-btn" id="back-btn">BACK TO SETUP</button>
+    <div class="status" id="status">Your turn!</div>
+    <div class="board" id="board">
+      <div class="cell" data-index="0"></div>
+      <div class="cell" data-index="1"></div>
+      <div class="cell" data-index="2"></div>
+      <div class="cell" data-index="3"></div>
+      <div class="cell" data-index="4"></div>
+      <div class="cell" data-index="5"></div>
+      <div class="cell" data-index="6"></div>
+      <div class="cell" data-index="7"></div>
+      <div class="cell" data-index="8"></div>
     </div>
+  </div>
+  <div class="action-buttons">
+    <button class="reset-btn" id="reset-btn">RESET GAME</button>
+    <button class="back-btn" id="back-btn">BACK TO SETUP</button>
+  </div>
+  <script>
+    let currentPlayer = 'X';
+    let gameState = Array(9).fill('');
+    let gameActive = true;
+    let playerSymbol = 'X';
+    let computerSymbol = 'O';
+    let difficulty = 'medium';
+    let computerFirst = false;
 
-    <script>
-        // Game state
-        let currentPlayer = 'X';
-        let gameState = ['', '', '', '', '', '', '', '', ''];
-        let gameActive = true;
-        let playerSymbol = 'X';
-        let computerSymbol = 'O';
-        let difficulty = 'medium';
-        let computerFirst = false;
-        
-        // DOM elements
-        const board = document.getElementById('board');
-        const cells = document.querySelectorAll('.cell');
-        const statusDisplay = document.getElementById('status');
-        const playerSymbolDisplay = document.getElementById('player-symbol');
-        const computerSymbolDisplay = document.getElementById('computer-symbol');
-        const difficultyDisplay = document.getElementById('difficulty-info');
-        const backBtn = document.getElementById('back-btn');
-        const resetBtn = document.getElementById('reset-btn');
-        
-        // Load game settings from setup page
-        function loadGameSettings() {
-            const settings = JSON.parse(localStorage.getItem('gameSettings'));
-            if (settings) {
-                difficulty = settings.difficulty;
-                playerSymbol = settings.symbol;
-                computerSymbol = playerSymbol === 'X' ? 'O' : 'X';
-                computerFirst = settings.firstPlayer === 'computer';
-                
-                // Set background
-                if (settings.background) {
-                    if (settings.background.startsWith('url')) {
-                        document.body.style.backgroundImage = settings.background;
-                    } else if (settings.background.startsWith('#')) {
-                        document.body.style.background = settings.background;
-                        document.body.style.backgroundImage = 'none';
-                    } else {
-                        document.body.style.background = '#f0f2f5';
-                        document.body.style.backgroundImage = 'none';
-                    }
-                }
-                
-                // Update UI
-                playerSymbolDisplay.textContent = playerSymbol;
-                computerSymbolDisplay.textContent = computerSymbol;
-                playerSymbolDisplay.className = playerSymbol === 'X' ? 'x' : 'o';
-                computerSymbolDisplay.className = computerSymbol === 'X' ? 'x' : 'o';
-                
-                difficultyDisplay.textContent = `Difficulty: ${capitalizeFirstLetter(difficulty)}`;
-            }
+    const board = document.getElementById('board');
+    const cells = document.querySelectorAll('.cell');
+    const statusDisplay = document.getElementById('status');
+    const playerSymbolDisplay = document.getElementById('player-symbol');
+    const computerSymbolDisplay = document.getElementById('computer-symbol');
+    const difficultyDisplay = document.getElementById('difficulty-info');
+    const backBtn = document.getElementById('back-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function loadGameSettings() {
+      const settings = JSON.parse(localStorage.getItem('gameSettings'));
+      if (settings) {
+        difficulty = settings.difficulty;
+        playerSymbol = settings.symbol;
+        computerSymbol = playerSymbol === 'X' ? 'O' : 'X';
+        computerFirst = settings.firstPlayer === 'computer';
+
+        if (settings.background) {
+          if (settings.background.startsWith('url')) {
+            document.body.style.backgroundImage = settings.background;
+          } else if (settings.background.startsWith('#')) {
+            document.body.style.background = settings.background;
+            document.body.style.backgroundImage = 'none';
+          } else {
+            document.body.style.background = '#f0f2f5';
+            document.body.style.backgroundImage = 'none';
+          }
         }
-        
-        // Initialize game
-        function initializeGame() {
-            gameState = ['', '', '', '', '', '', '', '', ''];
-            gameActive = true;
-            currentPlayer = 'X';
-            
-            // Clear board
-            cells.forEach(cell => {
-                cell.textContent = '';
-                cell.className = 'cell';
-            });
-            
-            // Set initial status
-            statusDisplay.textContent = computerFirst ? 'Computer is thinking...' : 'Your turn!';
-            statusDisplay.className = 'status';
-            
-            // If computer goes first, make its move
-            if (computerFirst) {
-                setTimeout(() => {
-                    makeComputerMove();
-                }, 500);
-            }
+
+        playerSymbolDisplay.textContent = playerSymbol;
+        computerSymbolDisplay.textContent = computerSymbol;
+        playerSymbolDisplay.className = playerSymbol.toLowerCase();
+        computerSymbolDisplay.className = computerSymbol.toLowerCase();
+        difficultyDisplay.textContent = `Difficulty: ${capitalizeFirstLetter(difficulty)}`;
+      }
+    }
+
+    function initializeGame() {
+      gameState.fill('');
+      gameActive = true;
+      currentPlayer = 'X';
+
+      cells.forEach(cell => {
+        cell.textContent = '';
+        cell.className = 'cell';
+      });
+
+      statusDisplay.textContent = computerFirst ? 'Computer is thinking...' : 'Your turn!';
+
+      if (computerFirst) {
+        setTimeout(makeComputerMove, 500);
+      }
+    }
+
+    function handleCellClick(e) {
+      const index = e.target.getAttribute('data-index');
+      if (gameState[index] || !gameActive || currentPlayer !== playerSymbol) return;
+
+      makeMove(index, playerSymbol);
+      if (checkWin(playerSymbol)) {
+        statusDisplay.textContent = 'You win! 🎉';
+        gameActive = false;
+        return;
+      } else if (checkDraw()) {
+        statusDisplay.textContent = 'Draw! 🤝';
+        gameActive = false;
+        return;
+      }
+
+      currentPlayer = computerSymbol;
+      statusDisplay.textContent = 'Computer is thinking...';
+      setTimeout(() => {
+        makeComputerMove();
+        if (checkWin(computerSymbol)) {
+          statusDisplay.textContent = 'Computer wins! 😢';
+          gameActive = false;
+        } else if (checkDraw()) {
+          statusDisplay.textContent = 'Draw! 🤝';
+          gameActive = false;
+        } else {
+          currentPlayer = playerSymbol;
+          statusDisplay.textContent = 'Your turn!';
         }
-        
-        // Handle cell clicks
-        function handleCellClick(e) {
-            const index = e.target.getAttribute('data-index');
-            
-            // Only proceed if the cell is empty and it's the player's turn
-            if (gameState[index] === '' && gameActive && currentPlayer === playerSymbol) {
-                makeMove(index, playerSymbol);
-                
-                if (checkWin()) {
-                    statusDisplay.textContent = 'You win! 🎉';
-                    statusDisplay.className = 'status win';
-                    gameActive = false;
-                    return;
-                } else if (checkDraw()) {
-                    statusDisplay.textContent = 'Game ended in a draw! 🤝';
-                    statusDisplay.className = 'status draw';
-                    gameActive = false;
-                    return;
-                }
-                
-                // Switch to computer's turn
-                currentPlayer = computerSymbol;
-                statusDisplay.textContent = 'Computer is thinking...';
-                statusDisplay.className = 'status';
-                
-                setTimeout(() => {
-                    makeComputerMove();
-                    
-                    if (checkWin()) {
-                        statusDisplay.textContent = 'Computer wins! 😢';
-                        statusDisplay.className = 'status lose';
-                        gameActive = false;
-                        return;
-                    } else if (checkDraw()) {
-                        statusDisplay.textContent = 'Game ended in a draw! 🤝';
-                        statusDisplay.className = 'status draw';
-                        gameActive = false;
-                        return;
-                    }
-                    
-                    // Switch back to player's turn
-                    currentPlayer = playerSymbol;
-                    statusDisplay.textContent = 'Your turn!';
-                    statusDisplay.className = 'status';
-                }, 500);
-            }
-        }
-        
-        // Make a move
-        function makeMove(index, symbol) {
-            gameState[index] = symbol;
-            cells[index].textContent = symbol;
-            cells[index].classList.add(symbol === 'X' ? 'x' : 'o');
-        }
-        
-        // Computer makes a move
-        function makeComputerMove() {
-            if (!gameActive) return;
-            
-            let move;
-            
-            switch(difficulty) {
-                case 'easy':
-                    move = getRandomMove();
-                    break;
-                case 'medium':
-                    move = getMediumMove();
-                    break;
-                case 'hard':
-                    move = getHardMove();
-                    break;
-                default:
-                    move = getRandomMove();
-            }
-            
-            makeMove(move, computerSymbol);
-        }
-        
-        // Easy AI - random move
-        function getRandomMove() {
-            const emptyCells = gameState.reduce((acc, cell, index) => {
-                if (cell === '') acc.push(index);
-                return acc;
-            }, []);
-            
-            return emptyCells[Math.floor(Math.random() * emptyCells.length)];
-        }
-        
-        // Medium AI - tries to win or block
-        function getMediumMove() {
-            // Check for winning move
-            for (let i = 0; i < 9; i++) {
-                if (gameState[i] === '') {
-                    const tempState = [...gameState];
-                    tempState[i] = computerSymbol;
-                    if (checkWinForBoard(tempState, computerSymbol)) {
-                        return i;
-                    }
-                }
-            }
-            
-            // Check for blocking move
-            for (let i = 0; i < 9; i++) {
-                if (gameState[i] === '') {
-                    const tempState = [...gameState];
-                    tempState[i] = playerSymbol;
-                    if (checkWinForBoard(tempState, playerSymbol)) {
-                        return i;
-                    }
-                }
-            }
-            
-            // Otherwise random
-            return getRandomMove();
-        }
-        
-        // Hard AI (placeholder)
-        function getHardMove() {
-            return getMediumMove(); // Replace with smarter AI
-        }
-        
-        // Check for win
-        function checkWin() {
-            return checkWinForBoard(gameState, currentPlayer);
-        }
-        
-        // Check for win on any board state
-        function checkWinForBoard(board, player) {
-            const winPatterns = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-                [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-                [0, 4, 8], [2, 4, 6]             // diagonals
-            ];
-            
-            return winPatterns.some(pattern => {
-                return pattern.every(index => board[index] === player);
-            });
-        }
-        
-        // Check for draw
-        function checkDraw() {
-            return !gameState.includes('') && !checkWin();
-        }
-        
-        // Helper function
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-        
-        // Event listeners
-        cells.forEach(cell => {
-            cell.addEventListener('click', handleCellClick);
-        });
-        
-        backBtn.addEventListener('click', () => {
-            window.location.href = 'game1.html';
-        });
-        
-        resetBtn.addEventListener('click', () => {
-            initializeGame();
-        });
-        
-        // Initialize the game when page loads
-        loadGameSettings();
-        initializeGame();
-    </script>
+      }, 500);
+    }
+
+    function makeMove(index, symbol) {
+      gameState[index] = symbol;
+      cells[index].textContent = symbol;
+      cells[index].classList.add(symbol.toLowerCase());
+    }
+
+    function getRandomMove() {
+      const emptyCells = gameState.map((val, i) => val === '' ? i : null).filter(v => v !== null);
+      return emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    }
+
+    function makeComputerMove() {
+      if (!gameActive) return;
+      let index = getRandomMove(); // Replace with smart AI if needed
+      makeMove(index, computerSymbol);
+    }
+
+    function checkWin(symbol) {
+      const winConditions = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+      ];
+      return winConditions.some(condition => condition.every(i => gameState[i] === symbol));
+    }
+
+    function checkDraw() {
+      return gameState.every(cell => cell !== '');
+    }
+
+    // Event Listeners
+    cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+    resetBtn.addEventListener('click', initializeGame);
+    backBtn.addEventListener('click', () => window.location.href = 'setup.html');
+
+    // Load and start
+    loadGameSettings();
+    initializeGame();
+  </script>
 </body>
 </html>
