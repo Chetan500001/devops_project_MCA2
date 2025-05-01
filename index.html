@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameZone - Home</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      font-family: "Impact", "Haettenschweiler", 'Franklin Gothic Bold', 'Arial Narrow Bold', sans-serif;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+      max-width: 90%;
+    }
+
+    .container h1 {
+      margin-bottom: 20px;
+      color: #5e60ce;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+    }
+
+    .container p {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin-bottom: 30px;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+    }
+
+    .game-btn {
+      display: block;
+      width: 100%;
+      max-width: 250px;
+      padding: 15px;
+      margin: 15px auto;
+      font-size: clamp(1rem, 4vw, 1.1rem);
+      font-weight: bold;
+      color: black;
+      font-family: "Impact", "Haettenschweiler", 'Franklin Gothic Bold', 'Arial Narrow Bold', sans-serif;
+      background: #FFD700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .game-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: clamp(0.8rem, 3vw, 0.9rem);
+      color: #888;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 WELCOME TO DEVOPS PROJECT</h1>
+    <p>SELECT A GAME TO START PLAYING</p>
+    <button class="game-btn" id="ticTacToeBtn">PLAY TIC TAC TOE</button>
+    <button class="game-btn" id="rpsBtn">PLAY ROCK PAPER SCISSORS</button>
+    <div class="footer">Made by Chetan, Harshpreet, Meenakshi, Naveen, Rishu</div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#ticTacToeBtn').click(function() {
+        window.location.href = "game1.html";
+      });
+
+      $('#rpsBtn').click(function() {
+        window.location.href = "index2.html";
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rock-Paper-Scissors with Markov Chain</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
+    <script>
+        // Fix flickering
+        window.addEventListener('load', () => {
+            document.body.style.visibility = 'visible';
+        });
+        document.body.style.visibility = 'hidden';
+    </script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="welcome-container">
+        <h1>ROCK PAPER & SCISSORS</h1>
+        <div class="welcome-content">
+            <h2>Welcome to the Game!</h2>
+            <div class="input-container">
+                <label for="player-name">Enter Your Name:</label>
+                <input type="text" id="player-name" placeholder="Player">
+            </div>
+            <div class="difficulty-container">
+                <p>Select Difficulty:</p>
+                <div class="difficulty-options">
+                    <button id="easy-mode" class="difficulty-btn selected">Easy</button>
+                    <button id="medium-mode" class="difficulty-btn">Medium</button>
+                    <button id="hard-mode" class="difficulty-btn">Hard</button>
+                </div>
+            </div>
+            <button id="start-game" class="start-btn">Start Game</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="game-container hidden">
+        <div class="header">
+            <h1 class="title game-item">ROCK PAPER & SCISSORS</h1>
+            <div class="stats-container">
+                <div class="player-stats">
+                    <span id="player-name-display">Player</span>
+                    <span id="player-wins">0</span>
+                </div>
+                <div class="match-counter">
+                    <span id="match-count">Match: 1</span>
+                </div>
+                <div class="computer-stats">
+                    <span>Computer</span>
+                    <span id="computer-wins">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-container">
+            <div class="show-result result-item"></div>
+            <div class="choice-container result-item">
+                <div class="player-choice-container">
+                    <p class="choice-label player-label">You</p>
+                    <img class="player-choice" src="images/rockgame.jpg" alt="Player choice" onerror="this.src='images/default.jpg'">
+                </div>
+                <div class="vs-indicator">VS</div>
+                <div class="computer-choice-container">
+                    <p class="choice-label computer-label">Computer</p>
+                    <img class="computer-choice" src="images/rockgame.jpg" alt="Computer choice" onerror="this.src='images/default.jpg'">
+                </div>
+            </div>
+            <div class="points-container result-item">
+                <p class="show-player-points"></p>
+                <p class="show-computer-points"></p>
+            </div>
+        </div>
+
+        <div class="button-container game-item">
+            <button class="rock-btn choice-btn">
+                <img src="images/rockgame.jpg" alt="Rock" onerror="this.src='images/default.jpg'">
+                <p>ROCK</p>
+            </button>
+            <button class="paper-btn choice-btn">
+                <img src="images/papergame.jpg" alt="Paper" onerror="this.src='images/default.jpg'">
+                <p>PAPER</p>
+            </button>
+            <button class="scissors-btn choice-btn">
+                <img src="images/scissorsgame.jpg" alt="Scissors" onerror="this.src='images/default.jpg'">
+                <p>SCISSORS</p>
+            </button>
+        </div>
+
+        <div class="game-controls">
+            <button id="play-again" class="control-btn">Play Again</button>
+            <button id="reset-game" class="control-btn">Reset Game</button>
+        </div>
+        
+        <div class="game-history">
+            <h3>Game History</h3>
+            <div id="history-container"></div>
+        </div>
+    </div>
+</body>
+</html>

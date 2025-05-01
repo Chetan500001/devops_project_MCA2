@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 Player Tic Tac Toe</title>
+    <style>
+      body {
+        font-family: 'Anton SC', sans-serif;
+        background: linear-gradient(to right, #83a4d4, #b6fbff);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f0f2f5;
+        color: #333;
+        flex-direction: column;
+      }
+        
+      .game-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        width: 350px;
+        max-width: 90%;
+        text-align: center;
+        margin-bottom: 20px;
+        backdrop-filter: blur(5px);
+      }
+        
+      .game-header {
+        margin-bottom: 20px;
+        
+      }
+      .game-header h1{
+        color: #5e60ce;
+    font-size: 2.0rem;               /* Sets a large font size */
+   /* Purple-blue color */
+    margin-bottom: 20px;  
+    letter-spacing: 1px; 
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+    font-weight: 900;           /* Space below the title */
+    /* font-family: 'Anton SC', sans-serif;  Uses the Anton SC font */
+    text-transform: uppercase;
+      }
+        
+      .game-info {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+        
+      .board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        margin: 20px auto;
+      }
+        
+      .cell {
+        width: 80px;
+        height: 80px;
+        background-color: #fff;
+        border: 2px solid grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 36px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+        
+      .cell:hover {
+        background-color: #f8f9fa;
+      }
+        
+      .cell.x {
+        color: #e74c3c;
+      }
+        
+      .cell.o {
+        color: #3498db;
+      }
+        
+      .status {
+        margin: 15px 0;
+        font-size: 18px;
+        font-weight: 500;
+        min-height: 24px;
+      }
+        
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        justify-content: center;
+        text-transform: uppercase;
+      }
+        
+      .back-btn, .reset-btn {
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+        
+      .back-btn {
+        background-color: #3498db;
+      }
+        
+      .back-btn:hover {
+        background-color: #2980b9;
+      }
+        
+      .reset-btn {
+        background-color: #f39c12;
+      }
+        
+      .reset-btn:hover {
+        background-color: #e67e22;
+      }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>Tic Tac Toe</h1>
+            <div class="game-info">
+                Player 1: <span id="player1-symbol" class="x">X</span> | 
+                Player 2: <span id="player2-symbol" class="o">O</span>
+            </div>
+        </div>
+        
+        <div class="status" id="status">Player X's turn</div>
+        
+        <div class="board" id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+    </div>
+    
+    <div class="action-buttons">
+        <button class="reset-btn" id="reset-btn">RESET GAME</button>
+        <button class="back-btn" id="back-btn">BACK TO SETUP</button>
+    </div>
+
+    <script>
+        // Game state
+        let currentPlayer = 'X';
+        let gameState = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = true;
+        
+        // DOM elements
+        const board = document.getElementById('board');
+        const cells = document.querySelectorAll('.cell');
+        const statusDisplay = document.getElementById('status');
+        const player1SymbolDisplay = document.getElementById('player1-symbol');
+        const player2SymbolDisplay = document.getElementById('player2-symbol');
+        const backBtn = document.getElementById('back-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        
+        // Initialize game
+        function initializeGame() {
+            gameState = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            currentPlayer = 'X';
+            
+            // Clear board
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.className = 'cell';
+            });
+            
+            // Set initial status
+            statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+            statusDisplay.className = 'status';
+        }
+        
+        // Handle cell clicks
+        function handleCellClick(e) {
+            const index = e.target.getAttribute('data-index');
+            
+            // Only proceed if the cell is empty and game is active
+            if (gameState[index] === '' && gameActive) {
+                // Make move
+                gameState[index] = currentPlayer;
+                e.target.textContent = currentPlayer;
+                e.target.classList.add(currentPlayer === 'X' ? 'x' : 'o');
+                
+                // Check for win
+                if (checkWin()) {
+                    statusDisplay.textContent = `Player ${currentPlayer} wins! 🎉`;
+                    statusDisplay.className = 'status win';
+                    gameActive = false;
+                    return;
+                }
+                
+                // Check for draw
+                if (checkDraw()) {
+                    statusDisplay.textContent = 'Game ended in a draw! 🤝';
+                    statusDisplay.className = 'status draw';
+                    gameActive = false;
+                    return;
+                }
+                
+                // Switch players
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+                statusDisplay.className = 'status';
+            }
+        }
+        
+        // Check for win
+        function checkWin() {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+                [0, 4, 8], [2, 4, 6]             // diagonals
+            ];
+            
+            return winPatterns.some(pattern => {
+                return pattern.every(index => gameState[index] === currentPlayer);
+            });
+        }
+        
+        // Check for draw
+        function checkDraw() {
+            return !gameState.includes('') && !checkWin();
+        }
+        
+        // Event listeners
+        cells.forEach(cell => {
+            cell.addEventListener('click', handleCellClick);
+        });
+        
+        backBtn.addEventListener('click', () => {
+            window.location.href = 'game1.html'; // Change to your setup page
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            initializeGame();
+        });
+        
+        // Initialize the game when page loads
+        initializeGame();
+    </script>
+</body>
+</html>

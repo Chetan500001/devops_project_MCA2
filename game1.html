@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Setup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #83a4d4, #b6fbff);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        .setup-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 30px 40px;
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #5e60ce; /* Purple color for the title */
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-family: 'Anton SC', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #fdfdfd;
+        }
+
+        .difficulty-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .difficulty-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: #FFD700; /* Yellow */
+            color: #333;
+            font-family: 'Anton SC', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .difficulty-btn:hover {
+            background-color: #3498db; /* Blue on hover */
+            color: white;
+        }
+
+        .difficulty-btn.selected {
+            background-color: #3498db; /* Blue when selected */
+            color: white;
+        }
+
+        .radio-group {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #fdfdfd;
+        }
+
+        .radio-option {
+            margin: 8px 0;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+
+        .radio-option input {
+            margin-right: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .back-btn, .start-btn {
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1;
+            font-family: 'Anton SC', sans-serif;
+        }
+
+        .start-btn {
+            background-color: #3498db;
+        }
+
+        .start-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .back-btn {
+            background-color: #e74c3c;
+        }
+
+        .back-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-container">
+        <h1>Tic Tac Toe Game</h1>
+
+        <!-- Game Mode -->
+        <div class="form-group">
+            <label for="mode">Game Mode:</label>
+            <select id="mode">
+                <option value="computer" selected>Play with Computer</option>
+                <option value="2player">Play with 2 Players</option>
+            </select>
+        </div>
+
+        <!-- Difficulty -->
+        <div class="form-group" id="difficulty-group">
+            <label for="difficulty">Difficulty Level:</label>
+            <div class="difficulty-options">
+                <button id="easy-btn" class="difficulty-btn selected">Easy</button>
+                <button id="medium-btn" class="difficulty-btn">Medium</button>
+                <button id="hard-btn" class="difficulty-btn">Hard</button>
+            </div>
+            <input type="hidden" id="difficulty" value="easy">
+        </div>
+
+        <!-- Symbol -->
+        <div class="form-group">
+            <label for="symbol">Choose your symbol:</label>
+            <select id="symbol">
+                <option value="X">X</option>
+                <option value="O">O</option>
+            </select>
+        </div>
+
+        <!-- First Player -->
+        <div class="form-group" id="first-player-group">
+            <label>Who plays first?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="user-first" name="firstPlayer" value="user" checked>
+                    <label for="user-first">I go first</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="computer-first" name="firstPlayer" value="computer">
+                    <label for="computer-first">Computer goes first</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="back-btn" id="back-btn">Back</button>
+            <button class="start-btn" id="start-btn">Start Game</button>
+        </div>
+    </div>
+
+    <script>
+        const modeSelect = document.getElementById('mode');
+        const difficultyGroup = document.getElementById('difficulty-group');
+        const firstPlayerGroup = document.getElementById('first-player-group');
+        const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+        const difficultyInput = document.getElementById('difficulty');
+
+        // Handle difficulty button selection
+        difficultyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                difficultyButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+                difficultyInput.value = button.id.replace('-btn', '');
+            });
+        });
+
+        // Toggle visibility of difficulty and first player settings
+        modeSelect.addEventListener('change', () => {
+            const isComputer = modeSelect.value === 'computer';
+            difficultyGroup.style.display = isComputer ? 'block' : 'none';
+            firstPlayerGroup.style.display = isComputer ? 'block' : 'none';
+        });
+
+        document.getElementById('start-btn').addEventListener('click', () => {
+            const mode = document.getElementById('mode').value;
+            const symbol = document.getElementById('symbol').value;
+
+            let gameSettings = {
+                mode: mode,
+                symbol: symbol
+            };
+
+            if (mode === 'computer') {
+                gameSettings.difficulty = difficultyInput.value;
+                gameSettings.firstPlayer = document.querySelector('input[name="firstPlayer"]:checked').value;
+                localStorage.setItem('gameSettings', JSON.stringify(gameSettings));
+                window.location.href = 'tic_tac_toe.html';
+            } else {
+                localStorage.setItem('gameSettings', JSON.stringify(gameSettings));
+                window.location.href = 'tic_tac_toe_2p.html';
+            }
+        });
+
+        // Back button functionality
+        document.getElementById('back-btn').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
